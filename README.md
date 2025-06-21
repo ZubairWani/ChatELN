@@ -1,39 +1,21 @@
-# 🧭 LogicPathAI - Your Partner in Thought
+ChatELN: Elenchic Logic Navigator
 
-This repository contains the source code for the LogicPathAI web application.
 
-## Tagline
-Your Partner in Thought.
 
-## Brand Line
-Don't just find answers. Discover the path. Welcome to LogicPathAI.
+![alt text](https://img.shields.io/badge/License-MIT-blue.svg)
 
-## Vision
-To become the essential tool for fostering critical thinking and structured reasoning in the digital age. LogicPathAI empowers individuals and teams to navigate complexity with confidence by turning unstructured thoughts into clear, actionable pathways.
 
-## Tech Stack
-- **Framework**: React (with Vite)
-- **Styling**: Tailwind CSS
-- **State Management**: Zustand
-- **Routing**: React Router
-- **Authentication**: Clerk
 
-## Getting Started
+ChatELN (Elenchic Logic Navigator) is a unique AI-powered thinking partner that redefines the user-AI interaction. Instead of providing direct answers, ChatELN employs the Socratic (Elenchic) method to ask intelligent, guiding questions. This process empowers users to deconstruct complex problems, challenge their own assumptions, and navigate their way to deeper understanding and novel solutions.
 
-1.  **Install Dependencies:**
-    ```bash
-    npm install
-    ```
+Core Philosophy
 
-2.  **Environment Variables:**
-    Copy the example environment file and fill in your keys (e.g., your Clerk publishable key).
-    ```bash
-    cp .env.example .env
-    ```
+Guided Discovery, Not Instant Answers: The primary goal is to enhance your critical thinking skills, not to replace them. The AI acts as a catalyst for your own logic, helping you build stronger reasoning pathways.
 
-3.  **Run the Development Server:**
-    ```bash
-    npm run dev
-    ```
+Structured Thinking Sessions: Tailor the AI's questioning style with modes like Creative, Debugging, and Strategic to fit your specific challenge. The system is designed to adapt to different types of intellectual work.
 
-The application will be available at `http://localhost:5173` (or the next available port).
+A Notebook for Your Mind: Every session is saved, creating a permanent, exportable record of your thought process. It serves as a true Electronic Lab Notebook for your ideas, strategies, and discoveries.
+
+Technology
+
+Built with a modern frontend stack including React, Vite, and Tailwind CSS for a fast, responsive, and intuitive user experience.
