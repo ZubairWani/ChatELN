@@ -1,6 +1,6 @@
-// DashboardSidebar.jsx - Updated for better responsiveness
+// DashboardSidebar.jsx - Updated with the new "welcome screen" theme
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getAllSessions } from '@/api/sessionService';
 import { useAuth } from '@/contexts/AuthContext';
 import {
@@ -8,7 +8,7 @@ import {
   MessageSquareText, MoreHorizontal, Crown, User
 } from 'lucide-react';
 
-// MenoLogo Component
+// MenoLogo Component - Updated with orange accent
 const MenoLogo = ({ className }) => (
   <svg
     className={className}
@@ -33,7 +33,7 @@ const MenoLogo = ({ className }) => (
   </svg>
 );
 
-// NavItem Component
+// NavItem Component - Updated with new theme colors
 const NavItem = ({ icon: Icon, text, to = "#", onClick, active = false, isCollapsed, badge = null, onLinkClick }) => {
   const handleClick = (e) => {
     if (onClick) {
@@ -47,9 +47,10 @@ const NavItem = ({ icon: Icon, text, to = "#", onClick, active = false, isCollap
     <Link
       to={to}
       onClick={handleClick}
+      // THEME CHANGE: Replaced blue/slate colors with orange/gray
       className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${active
-          ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg'
-          : 'text-slate-400 hover:bg-slate-800/80 hover:text-slate-200'
+          ? 'bg-[#c8794c] text-white shadow-md' // Active state is now orange
+          : 'text-gray-400 hover:bg-[#2a2a2a] hover:text-gray-100' // Inactive state uses welcome screen grays
         } ${isCollapsed ? 'justify-center' : ''}`}
     >
       <Icon className="w-5 h-5 flex-shrink-0" />
@@ -57,37 +58,38 @@ const NavItem = ({ icon: Icon, text, to = "#", onClick, active = false, isCollap
         <>
           <span className="text-sm font-medium truncate">{text}</span>
           {badge && (
-            <span className="ml-auto px-2 py-0.5 text-xs font-medium bg-blue-600 text-white rounded-full">
+            // THEME CHANGE: Badge is now orange
+            <span className="ml-auto px-2 py-0.5 text-xs font-semibold bg-white/20 text-white rounded-full">
               {badge}
             </span>
           )}
         </>
       )}
       {isCollapsed && (
-        <div className="absolute left-full ml-3 px-3 py-2 text-sm font-medium text-white bg-slate-800 border border-slate-600 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50 shadow-xl whitespace-nowrap">
+        <div className="absolute left-full ml-3 px-3 py-2 text-sm font-medium text-white bg-[#2a2a2a] border border-gray-700 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50 shadow-xl whitespace-nowrap">
           {text}
-          <div className="absolute left-0 top-1/2 transform -translate-x-1 -translate-y-1/2 w-2 h-2 bg-slate-800 border-l border-b border-slate-600 rotate-45"></div>
+          <div className="absolute left-0 top-1/2 transform -translate-x-1 -translate-y-1/2 w-2 h-2 bg-[#2a2a2a] border-l border-b border-gray-700 rotate-45"></div>
         </div>
       )}
     </Link>
   );
 };
 
-// SkeletonLoader
+// SkeletonLoader - Updated with new theme colors
 const SkeletonLoader = ({ isCollapsed }) => (
   <div className="space-y-2">
     {[...Array(5)].map((_, i) => (
       <div
         key={i}
-        className={`h-10 bg-gradient-to-r from-slate-700/30 to-slate-600/30 rounded-xl animate-pulse ${isCollapsed ? 'mx-1' : ''
-          }`}
+        // THEME CHANGE: Switched from slate to gray palette
+        className={`h-10 bg-gray-800/50 rounded-xl animate-pulse ${isCollapsed ? 'mx-1' : ''}`}
         style={{ animationDelay: `${i * 0.1}s` }}
       />
     ))}
   </div>
 );
 
-// Updated DashboardSidebar
+// DashboardSidebar main component
 const DashboardSidebar = ({
   activeSessionId,
   onLinkClick = () => { },
@@ -102,15 +104,10 @@ const DashboardSidebar = ({
   );
   const [showUserMenu, setShowUserMenu] = useState(false);
 
-
-  // For mobile view, sidebar is never collapsed
   const finalIsCollapsed = isMobileView ? false : isCollapsed;
 
   useEffect(() => {
-    // Only save collapsed state for desktop
-    if (!isMobileView) {
-      localStorage.setItem('sidebarCollapsed', isCollapsed);
-    }
+    if (!isMobileView) localStorage.setItem('sidebarCollapsed', isCollapsed);
   }, [isCollapsed, isMobileView]);
 
   useEffect(() => {
@@ -121,8 +118,7 @@ const DashboardSidebar = ({
           { id: '123', title: 'My First Chat', createdAt: new Date() },
           { id: '124', title: 'React Debugging', createdAt: new Date() },
         ]);
-        const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        setSessions(sortedData);
+        setSessions(data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
       } catch (error) {
         console.error("Failed to fetch sessions:", error);
       } finally {
@@ -143,93 +139,55 @@ const DashboardSidebar = ({
   }, [showUserMenu]);
 
   return (
-    <aside className={`flex flex-col h-screen bg-black border-r border-gray-800 ${className} ${finalIsCollapsed ? 'w-16' : 'w-72'
+    // THEME CHANGE: Updated background and border to match welcome screen
+    <aside className={`flex flex-col h-screen bg-[#1c1c1c] border-r border-gray-700/60 ${className} ${finalIsCollapsed ? 'w-16' : 'w-72'
       } transition-all duration-300`}>
 
       {/* HEADER */}
-      <div className={`flex items-center p-4 border-b border-gray-800 h-16 ${finalIsCollapsed ? 'justify-center' : 'justify-between'
-        }`}>
+      <div className={`flex items-center p-4 border-b border-gray-700/60 h-16 ${finalIsCollapsed ? 'justify-center' : 'justify-between'}`}>
         {!finalIsCollapsed && (
           <Link to="/dashboard" onClick={onLinkClick} className="flex items-center gap-3 group">
-            <MenoLogo className="w-8 h-8 text-blue-600 group-hover:text-blue-700 transition-colors" />
-            <span className="text-xl font-bold text-white">ChatELN</span>
+            <MenoLogo className="w-8 h-8" />
+            <span className="text-xl font-bold text-gray-100">ChatELN</span>
           </Link>
         )}
         {finalIsCollapsed && (
           <Link to="/dashboard" onClick={onLinkClick} className="flex items-center justify-center">
-            {/*  */}
+            
           </Link>
         )}
-
-        {/* Only show collapse button on desktop */}
         {!isMobileView && (
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-2 rounded-lg hover:bg-gray-800 transition-colors"
-          >
-            {isCollapsed ? (
-              <PanelLeftOpen className="w-5 h-5 text-gray-400" />
-            ) : (
-              <PanelLeftClose className="w-5 h-5 text-gray-400" />
-            )}
+          <button onClick={() => setIsCollapsed(!isCollapsed)} className="p-2 rounded-lg hover:bg-[#2a2a2a] transition-colors">
+            {isCollapsed ? <PanelLeftOpen className="w-5 h-5 text-gray-400" /> : <PanelLeftClose className="w-5 h-5 text-gray-400" />}
           </button>
         )}
-
         {isMobileView && (
-          <button
-onClick={onLinkClick}
-            className="p-2 rounded-lg hover:bg-gray-800 transition-colors transition-all duration-300"
-          >
+          <button onClick={onLinkClick} className="p-2 rounded-lg hover:bg-[#2a2a2a] transition-colors">
             <PanelLeftClose className="w-5 h-5 text-gray-400" />
-
           </button>
-        )
-
-        }
+        )}
       </div>
 
       {/* ACTION BUTTONS */}
       <div className="p-4 space-y-2">
-        <NavItem
-          icon={PenSquare}
-          text="New Chat"
-          to="/dashboard"
-          isCollapsed={finalIsCollapsed}
-          onLinkClick={onLinkClick}
-        />
-        <NavItem
-          icon={Search}
-          text="Search chats"
-          onClick={() => alert('Search clicked!')}
-          isCollapsed={finalIsCollapsed}
-          onLinkClick={onLinkClick}
-        />
+        <NavItem icon={PenSquare} text="New Chat" to="/dashboard" isCollapsed={finalIsCollapsed} onLinkClick={onLinkClick} />
+        <NavItem icon={Search} text="Search chats" onClick={() => alert('Search clicked!')} isCollapsed={finalIsCollapsed} onLinkClick={onLinkClick} />
       </div>
 
       {/* DIVIDER AND TITLE */}
       {!finalIsCollapsed && (
         <div className="px-4 py-2">
-          <div className="h-px bg-gray-800"></div>
+          <div className="h-px bg-gray-700/60"></div>
           <p className="text-xs font-medium text-gray-500 mt-3 mb-2 px-1">Recent Chats</p>
         </div>
       )}
 
       {/* SESSIONS LIST */}
       <nav className="flex-1 overflow-y-auto px-4 space-y-1 overflow-x-hidden">
-        {isLoading ? (
-          <SkeletonLoader isCollapsed={finalIsCollapsed} />
-        ) : sessions.length > 0 ? (
+        {isLoading ? <SkeletonLoader isCollapsed={finalIsCollapsed} /> : sessions.length > 0 ? (
           <div className="space-y-1 pb-4">
             {sessions.map(session => (
-              <NavItem
-                key={session.id}
-                to={`/session/${session.id}`}
-                icon={MessageSquareText}
-                text={session.title}
-                active={session.id === activeSessionId}
-                isCollapsed={finalIsCollapsed}
-                onLinkClick={onLinkClick}
-              />
+              <NavItem key={session.id} to={`/session/${session.id}`} icon={MessageSquareText} text={session.title} active={session.id === activeSessionId} isCollapsed={finalIsCollapsed} onLinkClick={onLinkClick} />
             ))}
           </div>
         ) : !finalIsCollapsed ? (
@@ -240,59 +198,31 @@ onClick={onLinkClick}
       </nav>
 
       {/* FOOTER */}
-      <div className="p-4 border-t border-gray-800 space-y-2">
-        <NavItem
-          icon={Crown}
-          text="Upgrade Plan"
-          to="/upgrade"
-          isCollapsed={finalIsCollapsed}
-          badge={!finalIsCollapsed ? "Pro" : null}
-          onLinkClick={onLinkClick}
-        />
-
+      <div className="p-4 border-t border-gray-700/60 space-y-2">
+        <NavItem icon={Crown} text="Upgrade Plan" to="/upgrade" isCollapsed={finalIsCollapsed} badge={!finalIsCollapsed ? "Pro" : null} onLinkClick={onLinkClick} />
         <div className="user-menu-container relative">
-          <button
-            onClick={() => setShowUserMenu(!showUserMenu)}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${showUserMenu ? 'bg-gray-800' : 'hover:bg-gray-800'
-              } ${finalIsCollapsed ? 'justify-center' : ''}`}
-          >
-            <div className="w-8 h-8 bg-blue-600 rounded-full flex-shrink-0 flex items-center justify-center text-white font-semibold">
+          <button onClick={() => setShowUserMenu(!showUserMenu)} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${showUserMenu ? 'bg-[#2a2a2a]' : 'hover:bg-[#2a2a2a]'
+            } ${finalIsCollapsed ? 'justify-center' : ''}`}>
+            {/* THEME CHANGE: User avatar is now orange */}
+            <div className="w-8 h-8 bg-[#3B82F6] rounded-full flex-shrink-0 flex items-center justify-center text-white font-semibold">
               {user?.name?.charAt(0).toUpperCase() || 'U'}
             </div>
             {!finalIsCollapsed && (
               <div className="flex-1 min-w-0 text-left">
-                <p className="text-sm font-medium text-white truncate">
-                  {user?.name || 'User'}
-                </p>
+                <p className="text-sm font-medium text-gray-100 truncate">{user?.name || 'User'}</p>
               </div>
             )}
             {!finalIsCollapsed && <MoreHorizontal className="w-4 h-4 text-gray-400" />}
           </button>
-
-          {/* User Menu Dropdown */}
           <div className={`absolute ${finalIsCollapsed ? 'left-full ml-3 bottom-0' : 'bottom-full mb-2 left-0'
-            } w-48 bg-gray-900 rounded-lg shadow-2xl border border-gray-700 transition-all duration-200 ${showUserMenu ? 'opacity-100 visible scale-100' : 'opacity-0 invisible scale-95'
-            }`}>
+            // THEME CHANGE: Dropdown menu background and border updated
+            } w-48 bg-[#2a2a2a] rounded-lg shadow-2xl border border-gray-700 transition-all duration-200 ${showUserMenu ? 'opacity-100 visible scale-100' : 'opacity-0 invisible scale-95'}`}>
             <div className="p-2">
-              <Link
-                to="/settings"
-                className="flex items-center w-full p-2 text-sm rounded-md text-gray-300 hover:bg-gray-800 transition-colors"
-                onClick={() => {
-                  setShowUserMenu(false);
-                  onLinkClick();
-                }}
-              >
+              <Link to="/settings" className="flex items-center w-full p-2 text-sm rounded-md text-gray-300 hover:bg-gray-700/50 transition-colors" onClick={() => { setShowUserMenu(false); onLinkClick(); }}>
                 <Settings className="w-4 h-4 mr-3" />
                 Settings
               </Link>
-              <button
-                onClick={() => {
-                  setShowUserMenu(false);
-                  logout();
-                  onLinkClick();
-                }}
-                className="flex items-center w-full p-2 text-sm rounded-md text-red-400 hover:bg-gray-800 transition-colors"
-              >
+              <button onClick={() => { setShowUserMenu(false); logout(); onLinkClick(); }} className="flex items-center w-full p-2 text-sm rounded-md text-red-400 hover:bg-gray-700/50 transition-colors">
                 <LogOut className="w-4 h-4 mr-3" />
                 Sign Out
               </button>

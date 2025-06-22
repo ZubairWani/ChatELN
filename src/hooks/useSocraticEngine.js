@@ -62,36 +62,56 @@ export const useSocraticEngine = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
-  const handleSendMessage = async () => {
+  
+  
+   const handleSendMessage = async () => {
     if (!input.trim() || isLoading) return;
 
+    const isFirstMessage = messages.length === 0;
     const userMessage = { id: Date.now(), text: input.trim(), sender: 'user' };
-    setMessages(prev => [...prev, userMessage]);
-    
     const currentInput = input;
+    
+    // Set loading state immediately for instant UI feedback (loader appears)
     setInput('');
     setIsLoading(true);
 
-    // If this is the very first message of a session, create one.
-    if (!session) {
-      const newSessionId = 'session_' + Date.now();
-      const newSessionTitle = currentInput.trim().substring(0, 40) + (currentInput.length > 40 ? '...' : '');
+    if (isFirstMessage) {
+      // --- WELCOME SCREEN DELAY LOGIC ---
+      setTimeout(() => {
+        // This code runs AFTER the 2-second delay
+        
+        // 1. Add the message to the state, which triggers the UI transition
+        setMessages([userMessage]);
+
+        // 2. Create the new session and navigate
+        const newSessionId = 'session_' + Date.now();
+        const newSessionTitle = currentInput.trim().substring(0, 40) + (currentInput.length > 40 ? '...' : '');
+        setSession({ id: newSessionId, title: newSessionTitle });
+        navigate(`/session/${newSessionId}`, { replace: true });
+
+        // 3. Get the bot response
+        const botResponse = getDummyResponse(userMessage.text);
+        setTimeout(() => {
+          const botMessage = { id: Date.now() + 1, text: botResponse.text, sender: 'bot' };
+          setMessages(prev => [...prev, botMessage]);
+          setIsLoading(false); // Only stop loading after bot responds
+        }, botResponse.delay);
+
+      }, 1000); // 2000 milliseconds = 2 seconds
+
+    } else {
+      // --- EXISTING LOGIC (no delay) ---
+      setMessages(prev => [...prev, userMessage]);
       
-      // Update the session state and navigate to the new URL.
-      // The useEffect will then handle the title.
-      setSession({ id: newSessionId, title: newSessionTitle });
-      navigate(`/session/${newSessionId}`, { replace: true });
+      const botResponse = getDummyResponse(userMessage.text);
+      setTimeout(() => {
+        const botMessage = { id: Date.now() + 1, text: botResponse.text, sender: 'bot' };
+        setMessages(prev => [...prev, botMessage]);
+        setIsLoading(false);
+      }, botResponse.delay);
     }
-
-    const botResponse = getDummyResponse(userMessage.text);
-
-    // Simulate AI response with a variable delay
-    setTimeout(() => {
-      const botMessage = { id: Date.now() + 1, text: botResponse.text, sender: 'bot' };
-      setMessages(prev => [...prev, botMessage]);
-      setIsLoading(false);
-    }, botResponse.delay);
   };
+  
   
   const handleNewChat = () => navigate('/dashboard');
   
@@ -137,3 +157,5 @@ export const useSocraticEngine = () => {
     handleSendMessage, handlePromptClick, handleNewChat, handleCopy, handleRegenerate, handleExport,
   };
 };
+
+

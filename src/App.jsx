@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 // Page Imports
 import HomePage from './pages/HomePage';
 import SessionPage from './pages/SessionPage';
-import AdminDashboardPage from './pages/AdminDashboardPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 // A 404 page is good practice, but for now, we'll redirect to home.
@@ -39,11 +38,11 @@ function App() {
       
       {/* === 3. ADMIN ROUTES (Optional) === */}
       {/* Example of a separate protected route that might not use the chat layout. */}
-      <Route path="/admin" element={
+      {/* <Route path="/admin" element={
         <ProtectedRoute>
           <AdminDashboardPage />
         </ProtectedRoute>
-      } />
+      } /> */}
 
       {/* === 4. FALLBACK ROUTE === */}
       {/* Catches any route that doesn't match and redirects to the home page. */}
