@@ -145,7 +145,7 @@ const Header = () => {
                 <MenoLogo className="h-7 w-7 sm:h-8 sm:w-8 text-blue-600 group-hover:text-blue-700 transition-colors" />
                 <div className="absolute inset-0 bg-blue-600/20 rounded-full scale-0 group-hover:scale-150 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
               </div>
-              <span className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+              <span className="text-lg sm:text-xl font-bold text-slate-700 group-hover:text-blue-600 transition-colors" style={{fontFamily: 'JetBrains Mono, Consolas, monospace'}}>
                 ChatELN
               </span>
             </Link>
@@ -312,7 +312,7 @@ const Header = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <MenoLogo className="h-6 w-6 text-blue-600" />
-                  <span className="text-lg font-bold text-slate-900">ChatELN</span>
+                  <span className="text-lg font-bold text-slate-700"style={{fontFamily: 'JetBrains Mono, Consolas, monospace'}}>ChatELN</span>
                 </Link>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}

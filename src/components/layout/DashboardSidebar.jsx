@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 
 // MenoLogo Component - Updated with orange accent
+
 const MenoLogo = ({ className }) => (
   <svg
     className={className}
@@ -16,22 +17,28 @@ const MenoLogo = ({ className }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
+    {/* The main speech bubble shape */}
     <g transform="rotate(8 50 50)">
       <path 
         d="M10 20C10 14.4772 14.4772 10 20 10H80C85.5228 10 90 14.4772 90 20V70C90 75.5228 85.5228 80 80 80H35L15 95V80H20C14.4772 80 10 75.5228 10 70V20Z"
-        fill="#3B82F6"
+        fill="#3B82F6" // Primary blue (blue-500)
       />
 
-      {/* Left Eye */}
-      <circle cx="38" cy="45" r="13" fill="white" />
-      <circle cx="38" cy="52" r="7" fill="#1E3A8A" /> {/* Pupil moved down */}
+      {/* The Eye */}
+      <circle cx="40" cy="45" r="15" fill="white" />
+      <circle cx="36" cy="48" r="8" fill="#1E3A8A" /> {/* Dark blue pupil (blue-900) */}
       
-      {/* Right Eye */}
-      <circle cx="72" cy="45" r="13" fill="white" />
-      <circle cx="72" cy="52" r="7" fill="#1E3A8A" /> {/* Pupil moved down */}
+      {/* The Wink */}
+      <path 
+        d="M65 42 C 70 48, 75 48, 80 42" 
+        stroke="#1E3A8A"
+        strokeWidth="6" 
+        strokeLinecap="round" 
+      />
     </g>
   </svg>
 );
+
 
 // NavItem Component - Updated with new theme colors
 const NavItem = ({ icon: Icon, text, to = "#", onClick, active = false, isCollapsed, badge = null, onLinkClick }) => {
@@ -146,16 +153,12 @@ const DashboardSidebar = ({
       {/* HEADER */}
       <div className={`flex items-center p-4 border-b border-gray-700/60 h-16 ${finalIsCollapsed ? 'justify-center' : 'justify-between'}`}>
         {!finalIsCollapsed && (
-          <Link to="/dashboard" onClick={onLinkClick} className="flex items-center gap-3 group">
+          <Link to="/" onClick={onLinkClick} className="flex items-center gap-3 group">
             <MenoLogo className="w-8 h-8" />
-            <span className="text-xl font-bold text-gray-100">ChatELN</span>
+              <span className="text-xl text-gray-100 font-bold" style={{fontFamily: 'JetBrains Mono, Consolas, monospace'}}>ChatELN</span>
           </Link>
         )}
-        {finalIsCollapsed && (
-          <Link to="/dashboard" onClick={onLinkClick} className="flex items-center justify-center">
-            
-          </Link>
-        )}
+       
         {!isMobileView && (
           <button onClick={() => setIsCollapsed(!isCollapsed)} className="p-2 rounded-lg hover:bg-[#2a2a2a] transition-colors">
             {isCollapsed ? <PanelLeftOpen className="w-5 h-5 text-gray-400" /> : <PanelLeftClose className="w-5 h-5 text-gray-400" />}

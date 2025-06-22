@@ -47,9 +47,9 @@ const SessionPageHeader = ({ onNewChat, onMenuClick, isWelcome = false }) => (
             >
               <Edit className="h-5 w-5" />
             </button>
-            <button className="hidden h-8 w-8 items-center justify-center rounded-full bg-[#c8794c] text-white sm:flex" aria-label="User Profile">
+            {/* <button className="hidden h-8 w-8 items-center justify-center rounded-full bg-[#3B82F6] text-white sm:flex" aria-label="User Profile">
               <User className="h-5 w-5" />
-            </button>
+            </button> */}
           </>
         )}
       </div>

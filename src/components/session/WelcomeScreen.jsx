@@ -29,7 +29,7 @@ const WelcomeScreen = ({ input, setInput, onSend, isLoading, onSuggestionClick }
         { icon: GraduationCap, text: 'Learn', prompt: "Explain the concept of..." },
         { icon: Code2, text: 'Code', prompt: "Write a Python script to..." },
         { icon: Coffee, text: 'Life stuff', prompt: "Give me ideas for a healthy breakfast." },
-        { icon: Lightbulb, text: 'Claude\'s choice', prompt: "Surprise me with an interesting fact." },
+        { icon: Lightbulb, text: 'Surprise', prompt: "Surprise me with an interesting fact." },
     ];
     
     // No changes needed for the rest of the logic

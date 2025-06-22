@@ -39,7 +39,7 @@ const MessageInput = ({ input, setInput, onSend, isLoading }) => {
                 </button>
             </div>
             <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1 text-sm text-gray-400 cursor-pointer hover:text-gray-200">
+                <div className="flex items-center gap-1 text-sm text-gray-400 cursor-pointer hover:text-gray-200"style={{fontFamily: 'JetBrains Mono, Consolas, monospace'}}>
                     ChatELN 1.2
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-50"><path d="M7 10l5 5 5-5H7z" fill="currentColor"></path></svg>
                 </div>
