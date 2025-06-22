@@ -104,7 +104,7 @@ const AuthLayout = ({ children, type }) => {
       </div>
 
       {/* Right Panel - Enhanced */}
-      <div className={`flex-1 flex flex-col items-center px-6 lg:px-8 relative z-10 transition-all duration-1000 delay-300 ${mounted ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
+      <div className={`flex-1 flex flex-col justify-center items-center px-6 lg:px-8 relative z-10 transition-all duration-1000 delay-300 ${mounted ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <div className="lg:hidden mb-8 text-center">
