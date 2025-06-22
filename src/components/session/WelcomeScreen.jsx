@@ -1,13 +1,30 @@
-// src/components/session/WelcomeScreen.jsx
-import React from 'react';
+import React, { useState } from 'react'; // 1. Import useState
 
-import { Pencil, GraduationCap, Code2, Coffee, Lightbulb, ArrowUp, Loader2 } from 'lucide-react'; // <-- Add Loader2
+import { Pencil, GraduationCap, Code2, Coffee, Lightbulb } from 'lucide-react';
 import MessageInput from './MessageInput';
+
+// 2. Create an array of possible welcome messages
+const welcomeMessages = [
+    "How can I help today?",
+    "What's on your mind?",
+    "Ready for another session?",
+    "Let's create something amazing.",
+    "Ask me anything.",
+    "Your creative partner is ready.",
+    "What can I assist you with?",
+    "Let's get started, shall we?",
+];
 
 const WelcomeScreen = ({ input, setInput, onSend, isLoading, onSuggestionClick }) => {
     
+    // 3. Use useState with a lazy initializer to pick a random message on mount.
+    // This function only runs once when the component is first created.
+    const [greeting] = useState(() => {
+        const randomIndex = Math.floor(Math.random() * welcomeMessages.length);
+        return welcomeMessages[randomIndex];
+    });
+
     const suggestions = [
-        // ... (suggestions array remains the same)
         { icon: Pencil, text: 'Write', prompt: "Help me write a blog post about..." },
         { icon: GraduationCap, text: 'Learn', prompt: "Explain the concept of..." },
         { icon: Code2, text: 'Code', prompt: "Write a Python script to..." },
@@ -15,7 +32,7 @@ const WelcomeScreen = ({ input, setInput, onSend, isLoading, onSuggestionClick }
         { icon: Lightbulb, text: 'Claude\'s choice', prompt: "Surprise me with an interesting fact." },
     ];
     
-    // We can extract the input logic here for clarity, though it's the same as before
+    // No changes needed for the rest of the logic
     const handleKeyDown = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -26,7 +43,6 @@ const WelcomeScreen = ({ input, setInput, onSend, isLoading, onSuggestionClick }
     };
     const canSend = !isLoading && input.trim();
 
-
     return (
         <div className="p-4 w-full h-full flex items-center justify-center">
              <div className="w-full max-w-2xl flex flex-col items-center">
@@ -34,18 +50,17 @@ const WelcomeScreen = ({ input, setInput, onSend, isLoading, onSuggestionClick }
                 <div className="text-center mb-8">
                     <h1 className="text-4xl sm:text-5xl text-gray-400 font-serif">
                         <span className="text-blue-400 text-5xl sm:text-6xl align-middle mr-3">*</span>
-                        Sunday session, zubair?
+                        {/* 4. Display the randomly selected greeting */}
+                        {greeting}
                     </h1>
                 </div>
 
-                {/* We pass the keydown handler and disabled state to the reusable MessageInput */}
                 <div className="mt-8 w-full">
                     <MessageInput
                         input={input}
                         setInput={setInput}
                         onSend={onSend}
                         isLoading={isLoading}
-                        // We need to slightly adjust MessageInput to handle the loader correctly
                     />
                 </div>
 
@@ -66,7 +81,5 @@ const WelcomeScreen = ({ input, setInput, onSend, isLoading, onSuggestionClick }
         </div>
     );
 };
-
-
 
 export default WelcomeScreen;

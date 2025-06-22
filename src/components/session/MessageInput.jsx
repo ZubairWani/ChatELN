@@ -48,7 +48,7 @@ const MessageInput = ({ input, setInput, onSend, isLoading }) => {
                     onClick={onSend}
                     // Disable the button if it's loading OR if there's no text
                     disabled={isLoading || !input.trim()}
-                    className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors bg-[#c8794c] hover:bg-orange-600 disabled:bg-gray-600 disabled:cursor-not-allowed"
+                    className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors bg-[#3B82F6] hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed"
                     title="Send Message"
                 >
                   {isLoading ? (
