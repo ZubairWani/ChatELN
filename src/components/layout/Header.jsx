@@ -113,7 +113,7 @@ const Header = () => {
 
   const userMenuItems = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-    { name: 'Settings', href: '/settings', icon: Settings }
+    { name: 'Settings', href: '/dashboard/settings', icon: Settings }
   ];
 
   const handleNavClick = (href) => {

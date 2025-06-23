@@ -220,6 +220,8 @@ const MenoLogo = ({ className }) => (
   </svg>
 );
 
+
+
   return (
     
     <div className=" text-slate-800">
@@ -782,7 +784,7 @@ const MenoLogo = ({ className }) => (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-2">
-              <div className="flex items-center mb-4"> <MenoLogo className="h-8 w-8 text-blue-600 group-hover:text-blue-700 transition-colors" /><span className=" px-2 text-2xl font-bold">ChatELN</span></div>
+              <div className="flex items-center mb-4"> <MenoLogo className="h-8 w-8 text-blue-600 group-hover:text-blue-700 transition-colors" /><span className=" px-2 text-2xl"style={{fontFamily: 'JetBrains Mono, Consolas, monospace'}} >ChatELN</span></div>
               <p className="text-slate-400 mb-4 max-w-md">Your Partner in Thought. Transform unstructured thinking into clear, actionable pathways with our AI-powered Socratic method.</p>
               <div className="flex space-x-4">
                 <a href="#" className="text-slate-400 hover:text-white transition-colors"><Twitter className="w-5 h-5" /></a>

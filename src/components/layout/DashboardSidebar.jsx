@@ -174,7 +174,7 @@ const DashboardSidebar = ({
       {/* ACTION BUTTONS */}
       <div className="p-4 space-y-2">
         <NavItem icon={PenSquare} text="New Chat" to="/dashboard" isCollapsed={finalIsCollapsed} onLinkClick={onLinkClick} />
-        <NavItem icon={Search} text="Search chats" onClick={() => alert('Search clicked!')} isCollapsed={finalIsCollapsed} onLinkClick={onLinkClick} />
+        <NavItem icon={Search} text="Search chats" to="/dashboard/search" isCollapsed={finalIsCollapsed} onLinkClick={onLinkClick} />
       </div>
 
       {/* DIVIDER AND TITLE */}
@@ -202,7 +202,7 @@ const DashboardSidebar = ({
 
       {/* FOOTER */}
       <div className="p-4 border-t border-gray-700/60 space-y-2">
-        <NavItem icon={Crown} text="Upgrade Plan" to="/upgrade" isCollapsed={finalIsCollapsed} badge={!finalIsCollapsed ? "Pro" : null} onLinkClick={onLinkClick} />
+        <NavItem icon={Crown} text="Upgrade Plan" to="dashboard/upgrade" isCollapsed={finalIsCollapsed} badge={!finalIsCollapsed ? "Pro" : null} onLinkClick={onLinkClick} />
         <div className="user-menu-container relative">
           <button onClick={() => setShowUserMenu(!showUserMenu)} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${showUserMenu ? 'bg-[#2a2a2a]' : 'hover:bg-[#2a2a2a]'
             } ${finalIsCollapsed ? 'justify-center' : ''}`}>
@@ -221,7 +221,7 @@ const DashboardSidebar = ({
             // THEME CHANGE: Dropdown menu background and border updated
             } w-48 bg-[#2a2a2a] rounded-lg shadow-2xl border border-gray-700 transition-all duration-200 ${showUserMenu ? 'opacity-100 visible scale-100' : 'opacity-0 invisible scale-95'}`}>
             <div className="p-2">
-              <Link to="/settings" className="flex items-center w-full p-2 text-sm rounded-md text-gray-300 hover:bg-gray-700/50 transition-colors" onClick={() => { setShowUserMenu(false); onLinkClick(); }}>
+              <Link to="dashboard/settings" className="flex items-center w-full p-2 text-sm rounded-md text-gray-300 hover:bg-gray-700/50 transition-colors" onClick={() => { setShowUserMenu(false); onLinkClick(); }}>
                 <Settings className="w-4 h-4 mr-3" />
                 Settings
               </Link>
