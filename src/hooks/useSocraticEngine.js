@@ -24,18 +24,18 @@ const responsePatterns = {
     
 
     YAHYA_INFO: {
-      keywords: ['who is muhammad yahya', 'who is yahya', 'tell me about yahya', 'muhammad yahya'],
-      responses: [
-        "Muhammad Yahya is a brilliant developer and key architect of my cognitive systems. His expertise in advanced algorithms and conversational AI has been instrumental in making me capable of nuanced, context-aware interactions.",
-        "Yahya is an exceptional engineer and close collaborator with Zubair Wani. His contributions to my logical reasoning capabilities and contextual understanding have been fundamental to my ability to engage in sophisticated discourse."
-      ]
-    },
+  keywords: ['who is muhammad yahya', 'who is yahya', 'tell me about yahya', 'muhammad yahya'],
+  responses: [
+    "Muhammad Yahya is a young, brilliant math student with an exceptional talent for logical reasoning and problem-solving. He's currently helping Zubair develop strong logic-building skills through mathematical concepts and structured thinking approaches.",
+    "Yahya is a gifted young mathematician who excels at breaking down complex problems into simple, logical steps. He's been working closely with Zubair to strengthen his analytical thinking and mathematical reasoning abilities, making abstract concepts easier to understand."
+  ]
+},
     
-   hamza_INFO: {
+  HAMZA_INFO: {
   keywords: ['who is muhammad hamza', 'who is hamza', 'tell me about hamza', 'hamza'],
   responses: [
-    "Muhammad Hamza is a brilliant mathematician and developer, serving as a key architect of my cognitive systems. His deep expertise in mathematical logic, advanced algorithms, and conversational AI has been instrumental in making me capable of nuanced, context-aware interactions with strong logical reasoning.",
-    "Hamza is an exceptional mathematician and engineer, close collaborator with Zubair Wani. His mastery of mathematical principles and logical frameworks has been fundamental to my ability to engage in sophisticated discourse and solve complex problems with mathematical precision."
+    "Muhammad Hamza is a dedicated young student who's always busy with his studies but still finds time to help Zubair with important decisions. He's particularly good at guiding Zubair on research directions, suggesting where to look for information, and helping him navigate through complex choices.",
+    "Hamza is a focused student who balances his academic commitments while being a valuable advisor to Zubair. Despite his busy study schedule, he consistently helps Zubair make informed decisions about his projects and points him toward the right resources and directions for his work."
   ]
 },
 
