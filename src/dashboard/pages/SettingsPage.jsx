@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import SettingsSidebar from '../../components/dashboard/SettingsSidebar';
+
+// Import the new tab component and all the content components
+
+import AccountSettings from '../../components/dashboard/AccountSettings';
+import BillingSettings from '../../components/dashboard/BillingSettings';
+import SettingsTabs from '../../components/dashboard/SettingsTab';
 import ProfileSettings from '../../components/dashboard/ProfileSettings';
+import AppearanceSettings from '../../components/dashboard/AppearanceSettings';
 
-
-// Placeholder for other setting pages
+// A single placeholder for the remaining tabs
 const PlaceholderContent = ({ title }) => (
     <div>
         <h1 className="text-2xl text-white font-semibold">{title}</h1>
@@ -19,21 +24,33 @@ const SettingsPage = () => {
             case 'Profile':
                 return <ProfileSettings />;
             case 'Appearance':
-                return <PlaceholderContent title="Appearance" />;
+                return <AppearanceSettings />;
             case 'Account':
-                return <PlaceholderContent title="Account" />;
-            // Add other cases here
+                return <AccountSettings />;
+            case 'Privacy':
+                return <PlaceholderContent title="Privacy" />;
+            case 'Billing':
+                return <BillingSettings />;
+            case 'Integrations':
+                return <PlaceholderContent title="Integrations" />;
             default:
                 return <ProfileSettings />;
         }
     };
 
     return (
-        <div className="flex w-full h-full p-8 text-white bg-[#1c1c1c]">
-            <SettingsSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-            <main className="flex-1 pl-8">
-                {renderContent()}
-            </main>
+        <div className="w-full h-full p-8 text-white bg-[#1c1c1c] overflow-y-auto">
+            <div className="max-w-4xl mx-auto">
+                <h1 className="text-4xl font-serif text-gray-300">Settings</h1>
+                
+                <div className="mt-8">
+                    <SettingsTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+                </div>
+                
+                <main className="mt-8">
+                    {renderContent()}
+                </main>
+            </div>
         </div>
     );
 };
